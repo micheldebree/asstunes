@@ -1,7 +1,6 @@
-.pc =$0801 "Basic Upstart Program"
-:BasicUpstart($0ffd)
+.pc =$0801 "Basic Upstart"
+:BasicUpstart(player)
 .encoding "petscii_mixed"
-
 
 //charles deenen player
 //re-assembled by trooper & youth /htw
@@ -10,7 +9,6 @@
 .var musicstore = musicloc
 //---------------------------------------
          .pc= musicloc-3
-         //.offs musicstore-musicloc //TODO: Replace .pc + .offs with .pseudopc block
          jmp player
 
 .var f1f      = $1f
@@ -1084,26 +1082,24 @@ d0:       .byte $00,$41,$41,$41,$41,$21
 d1:       .byte $00,$00,$00,$05,$05,$09
          .byte $09,$ff
 //  hat
-d2:       .byte $00,$81,$11,$80,$10
-         .byte $80,$10,$80,$fe
-d3:       .byte $80,$fc,$18,$fc,$18
-         .byte $fc,$18,$fc,$fe
+d2:       .byte $00,$81,$11,$10,$fe
+d3:       .byte $80,$d0,$11,$16,$13,$11
+         .byte $0f,$0e,$0c,$0a,$07,$05
+         .byte $fe
 //  base
-d4:       .byte $0c,$41,$11,$11,$11
-         .byte $11,$10,$fe
-d5:       .byte $80,$0c,$10,$0a
-         .byte $08,$05,$03,$fe
+d4:       .byte $0c,$81,$11,$40,$40
+         .byte $40,$40,$00,$fe
+d5:       .byte $80,$30,$10,$0c
+         .byte $08,$06,$04,$00,$fe
 //snare2
-d6:       .byte $00,$81,$40,$80,$fe
-d7:       .byte $80,$40,$0f,$40,$fe
+d6:       .byte $00,$81,$41,$41,$80,$fe
+d7:       .byte $80,$d8,$0e,$0c,$d8,$fe
 //---------------------------------------
 //            FILTERS
 //---------------------------------------
-f1:       .byte $10,$a1,$05,$e8,$05,$f8
-         .byte $ff
-f2:       .byte $31,$88,$00,$ff,$ff
-f3:       .byte $11,$28,$00,$ff
-         .byte $ff
+f1:       .byte $30,$08,$04,$ff,$ff
+f2:       .byte $31,$58,$00,$ff,$ff
+f3:       .byte $31,$74,$ff
 //---------------------------------------
 //              EGELS
 //---------------------------------------
@@ -1125,11 +1121,10 @@ e5:       .byte $6a,$01,$01,$08,$ff
 //---------------------------------------
 // speed,notes,$ff/$fe
 
-q00:      .byte $01,$00,$03,$07,$0a,$ff
-q01:      .byte $01,$00,$03,$05,$09,$ff
-q02:      .byte $00,$00,$05,$09,$ff
-//---------------------------------------
-q03:      .byte $01,$00,$05,$0c,$ff
+q00:      .byte $10,$07,$03,$0c,$ff
+q01:      .byte $10,$07,$04,$0c,$ff
+q02:      .byte $10,$08,$05,$0c,$ff
+q03:      .byte $10,$09,$05,$0c,$ff
 q04:      .byte $10,$08,$03,$0c,$ff
 q05:      .byte $10,$00,$03,$06,$ff
 q06:      .byte $10,$00,$02,$07,$ff
@@ -1170,29 +1165,29 @@ f1ac5:          // pulse
 //          $50-$90 = pluck
 //              $.4 = arpeggio
 
-c00:      .byte $08,$89,$09,$f9//base
-         .byte $08,$00,$00,$30
+c00:      .byte $0b,$41,$00,$67
+         .byte $02,$33,$02,$50// bass
 
-c01:      .byte $08,$89,$00,$65//hihat
+c01:      .byte $08,$11,$00,$75
          .byte $f8,$00,$00,$20
 
-c02:      .byte $13,$41,$00,$a5//bass1
-         .byte $01,$23,$40,$60
+c02:      .byte $08,$11,$00,$75// base
+         .byte $f8,$00,$00,$30
 
-c03:      .byte $08,$89,$00,$e5//snare2
-         .byte $0a,$00,$00,$40
+c03:      .byte $00,$11,$00,$49// scratch
+         .byte $f0,$03,$00,$70
 
-c04:      .byte $15,$21,$03,$a5//chord
-         .byte $20,$00,$37,$74
+c04:      .byte $09,$11,$00,$39
+         .byte $38,$00,$02,$10
 
-c05:      .byte $15,$71,$00,$d5//bass2
-         .byte $01,$23,$20,$80
+c05:      .byte $08,$11,$00,$75// snare
+         .byte $f8,$00,$00,$40
 
-c06:      .byte $08,$89,$07,$07//snare2
-         .byte $fa,$00,$00,$40
+c06:      .byte $06,$41,$00,$69// bass 2
+         .byte $03,$00,$01,$54
 
-c07:      .byte $13,$41,$00,$ba//bass3
-         .byte $13,$23,$20,$60
+c07:      .byte $02,$41,$00,$38// solo 1
+         .byte $02,$33,$04,$60
 
 c08:      .byte $02,$41,$00,$38
          .byte $00,$22,$04,$60
@@ -1228,12 +1223,12 @@ c11:      .byte $00,$15,$00,$9a
 //---------------------------------------
 f1ba5:    .byte $00,$01,$02,$04
 //len
-         .byte $02,$02,$02,$02
+         .byte $02,$02,$02,$28
          .byte $08
 
 f1bae:    .byte $00,$01,$02,$04
 //waveform
-         .byte $81,$71,$11,$41
+         .byte $81,$11,$15,$41
          .byte $51
 //---------------------------------------
 //            TRACKS
@@ -1243,16 +1238,38 @@ f1c42:
        // $80+x = transpose
 
 t11:
-t01:      .byte $8c,$02,$03,$02,$04,$ff
+t01:    // .byte $8c,$00,$ff
 
+         .byte $8c,$01,$01,$91,$01,$01
+         .byte $8c,$01,$01,$91,$01,$06
+         .byte $8c,$01,$01,$91,$01,$01
+         .byte $8c,$01,$01,$91,$01,$01
+         .byte $8c,$01,$01,$91,$01,$06
+         .byte $8d,$01,$01,$92,$01,$01
+         .byte $8d,$01,$01,$92,$01,$06
+         .byte $ff
 //---------------------------------------
 t12:
-t02:      .byte $8c,$01,$05,$01,$06,$ff
+t02:    // .byte $8c,$00,$ff
+
+         .byte $73,$00
+         .byte $98,$05
+         .byte $8c,$02,$8d
+         .byte $8d,$08,$08
+         .byte $ff
 
 //---------------------------------------
 t13:
-t03:      .byte $98,$00,$ff
+t03:    //  .byte $8c,$00,$ff
 
+         .byte $8c,$03,$03,$04,$04
+         .byte $8c,$03,$03,$04,$07
+         .byte $8c,$03,$03,$04,$04
+         .byte $8c,$03,$03,$04,$04
+         .byte $8c,$03,$03,$04,$07
+         .byte $8d,$03,$03,$04,$04
+         .byte $8d,$03,$03,$04,$07
+         .byte $ff
 //---------------------------------------
 //              BLOCKS
 //---------------------------------------
@@ -1268,132 +1285,82 @@ t03:      .byte $98,$00,$ff
          //     $f5 =        track 3
 
 b00:      .byte $f0,$f0,$f0,$f0,$ff
-//---------------------------------------
-b01:      .byte $c0,$84,$00,$c4,$82,$60
-         .byte $30,$c1,$00
-         .byte $c0,$00,$c4,$82,$62,$2e
-         .byte $c1,$00
-         .byte $c4,$60,$30
-         .byte $c0,$82,$00,$c4,$82,$30
-         .byte $62,$2e
-         .byte $60,$30,$c0,$82,$00,$c1
-         .byte $00,$c4,$82,$62
-         .byte $2e,$60,$30
-         .byte $c0,$84,$00,$c4,$30
-         .byte $c0,$82,$00,$c4,$62,$2e
-         .byte $c1
-         .byte $00,$c4
-         .byte $60,$30
-         .byte $c0,$82,$00,$c4,$82,$30
-         .byte $62,$2e
-         .byte $60,$30,$c0,$00,$c1
-         .byte $00,$c4,$62,$2e
-         .byte $60,$30,$ff
-//---------------------------------------
-b02:      .byte $fe,$f1
-         .byte $c2,$84,$0c,$c5,$82,$18
-         .byte $c2,$0c
-         .byte $c3,$00,$c2,$24
-         .byte $c5,$12,$c2,$84
-         .byte $13
-         .byte $c2,$82,$18,$c5,$0a,$c2
-         .byte $16
-         .byte $c3,$00,$c5,$16,$c2,$84
-         .byte $18
 
-         .byte $84,$0c,$c5,$82,$18
-         .byte $c2,$0c
-         .byte $c3,$00,$c2,$24
-         .byte $c5,$12,$c2,$84
-         .byte $13
-         .byte $c2,$82,$24,$c5,$16,$c2
-         .byte $18
-         .byte $c3,$00,$c5,$0c,$c2,$0f
-         .byte $c5,$10
-         .byte $ff
-//---------------------------------------
-b03:      .byte $fe,$f1
-         .byte $c2,$84,$11,$c5,$82,$1d
-         .byte $c2,$11
-         .byte $c3,$00,$c2,$29
-         .byte $c5,$0c,$c2,$84
-         .byte $0f
-         .byte $c2,$82,$10,$c5,$1d,$c2
-         .byte $11
-         .byte $c3,$00,$c5,$1d,$c2,$84
-         .byte $0f
-
-         .byte $84,$11,$c5,$82,$1d
-         .byte $c2,$11
-         .byte $c3,$00,$c2,$29
-         .byte $c5,$0f,$c2,$84
-         .byte $0f
-         .byte $c2,$82,$13,$c5,$18,$c2
-         .byte $1d
-         .byte $c3,$00,$c5,$1b,$c2,$16
-         .byte $c6,$00
-         .byte $ff
-//---------------------------------------
-b04:      .byte $fe,$f1
-         .byte $c2,$84,$11,$c5,$82,$1d
-         .byte $c2,$11
-         .byte $c3,$00,$c2,$29
-         .byte $c5,$0c,$c2,$84
-         .byte $0f
-         .byte $c2,$82,$10,$c5,$1d,$c2
-         .byte $11
-         .byte $c3,$00,$c5,$1d,$c2,$84
-         .byte $0f
-
-         .byte $fe,$f1
-         .byte $c2
-         .byte $84,$11,$c5,$82,$1d
-         .byte $c2,$11
-         .byte $c3,$00,$c2,$29
-         .byte $c5,$83,$0c,$e1
-         .byte $c7,$87
-         .byte $0f,$e1
-         .byte $87,$0e,$e1
-         .byte $ff
-//---------------------------------------
-b05:      .byte $c0,$84,$00,$c4,$82,$61
-         .byte $30,$c1,$00
-         .byte $c0,$00,$c4,$82,$62,$30
+b01:      .byte $fe,$f1
+         .byte $c0,$84,$0c
+         .byte $c1,$82,$00,$c0,$13
+         .byte $c6
+         .byte $84,$6a,$0c
+         .byte $c1,$82,$00,$c0,$11
          .byte $c1,$00
-         .byte $c4,$61,$30
-         .byte $c0,$82,$00,$c4,$82,$30
-         .byte $62,$30
-         .byte $61,$30,$c0,$82,$00,$c1
-         .byte $00,$c4,$82,$62
-         .byte $30,$61,$30
-         .byte $c0,$84,$00,$c4,$30
-         .byte $c0,$82,$00,$c4,$62,$30
-         .byte $c1
-         .byte $00,$c4
-         .byte $61,$30
-         .byte $c0,$82,$00,$c4,$82,$30
-         .byte $62,$30
-         .byte $61,$30,$c0,$00,$c1
-         .byte $00,$c4,$62,$30
-         .byte $61,$30,$ff
-//---------------------------------------
-b06:      .byte $c0,$84,$00,$c4,$82,$61
-         .byte $30,$c1,$00
-         .byte $c0,$00,$c4,$82,$62,$30
-         .byte $c1,$00
-         .byte $c4,$61,$30
-         .byte $c0,$82,$00,$c4,$82,$30
-         .byte $62,$30
-         .byte $61,$30,$c0,$82,$00,$c1
-         .byte $00,$c4,$82,$62
-         .byte $30,$61,$30
-         .byte $c0,$84,$00,$c4,$30
-         .byte $c0,$82,$00,$c4,$62,$30
-         .byte $c1
-         .byte $00,$c4
-         .byte $61,$30
-         .byte $c0,$88,$00,$00,$ff
-//---------------------------------------
+         .byte $c0,$12
+         .byte $c6,$84,$6a,$07
+         .byte $c0,$82
+         .byte $0a
+         .byte $c0,$16,$0a,$07,$ff
+
+b02:      .byte $f0,$f0,$f0,$f0
+         .byte $f0,$f0,$f0,$f0,$ff
+
+b03:      .byte $c2,$82,$00,$c3,$30,$c4
+         .byte $84,$63,$2e,$c5,$84,$00
+         .byte $c2,$84,$00,$c4,$84,$2e
+         .byte $82,$2e
+         .byte $c2,$82,$00,$c5,$84,$00
+         .byte $c3,$82,$30,$c4,$2e,$ff
+
+b04:      .byte $c2,$82,$00,$c3,$30,$c4
+         .byte $84,$63,$30,$c5,$84,$00
+         .byte $c2,$84,$00,$c4,$84,$30
+         .byte $82,$30
+         .byte $c2,$82,$00,$c5,$84,$00
+         .byte $c3,$82,$30,$c4,$30,$ff
+
+b05:      .byte $c7,$90,$fd,$06,$32
+         .byte $33,$84,$30
+         .byte $29,$82
+         .byte $2a
+         .byte $c9,$2a
+         .byte $c7,$2b,$c9,$2b
+         .byte $c8,$86,$2e,$c7
+         .byte $82,$2a,$e4,$90,$24,$82
+         .byte $1f,$22,$c8,$84,$27,$c7
+         .byte $82,$24,$c8,$84,$27
+         .byte $c7,$82,$24
+         .byte $c8,$84,$27
+         .byte $c7,$82,$24,$e4,$c7,$1f
+         .byte $22,$24,$26,$27,$29,$2a
+         .byte $2b,$2e,$2b,$e2,$2a
+         .byte $e2,$82,$29,$e2,$82,$26
+         .byte $d1
+         .byte $88,$6a,$30
+         .byte $ca,$82,$3a,$86,$fd
+         .byte $08,$3a,$3c,$82,$37,$3a
+         .byte $3c,$3f,$3e,$84
+         .byte $3c,$82,$3a,$84,$37
+         .byte $c7
+         .byte $82,$27,$e2,$22,$88
+         .byte $fd,$05,$22,$24,$e8,$82
+         .byte $22,$24,$e2,$27,$e2,$29
+         .byte $e4,$84
+         .byte $fd,$05,$2a,$2b,$84,$2a
+         .byte $29,$82,$24
+         .byte $c8,$84,$27,$c7
+         .byte $82,$24,$e6,$24,$27,$29
+         .byte $84
+         .byte $fd,$05,$2a,$2b,$84,$2a
+         .byte $29,$82,$24
+         .byte $c8,$86,$27
+         .byte $e6,$c7
+         .byte $82,$24,$27,$29
+         .byte $ff
+
+b06:      .byte $fe,$f1
+         .byte $c0,$83,$0c,$e1,$0c,$e1
+         .byte $0c,$e1,$82,$0c
+         .byte $c6,$92,$6a,$0c
+         .byte $ff
+
 b07:      .byte $c2,$84,$00,$00,$00,$82
          .byte $00,$86,$00
          .byte $cb,$82,$00,$00
@@ -1518,36 +1485,21 @@ sla:
 
 hex:      .text "0123456789abcdef"
 mess:
-         .byte $93,$9b
-         .text "song: "
-         .byte $05
-         .text "splash"
-         .byte $0d,$9b
-         .text "composed by "
-         .byte $05
-         .text "heatwave"
-         .byte $9b
-         .text " in 1995"
+         .text "{clear}{light gray}song: {white}splash"
+         .byte $0d
+         .text "{light gray}composed by {white}heatwave"
+         .text " {light gray}in 1995"
          .byte $0d
          .text "player by charles "
          .text "deenen"
          .byte $0d
          .text "player adapted by "
-         .byte $05
-         .text "youth"
-         .byte $9b,$0d,$0d
+         .text "{white}youth{light gray}"
+         .byte $0d,$0d
          .text "for demonstration "
-         .text "purposes "
-         .byte $05
-         .text "only"
-         .byte $9b
-         .text "..."
+         .text "purposes {white}only{light gray}..."
          .byte $0d
-         .text "do "
-         .byte $05
-         .text "not"
-         .byte $9b
-         .text " use this, "
+         .text "do {white}not{light gray} use this, "
          .text "it's not finished yet!"
          .byte $0d,$0d,$00
 
