@@ -2,7 +2,6 @@
 :BasicUpstart($0ffd)
 .encoding "petscii_mixed"
 
-
 //charles deenen player
 //re-assembled by trooper & youth /htw
 
@@ -392,7 +391,7 @@ i132f:    lda f1ac9,y
          lda #$01
          sta f10d2,x
          jmp i17f0
-i134a:    lda f1ac6,y
+i134a:    lda wav,y
          sta f10d2,x
          jmp i17f0
 i1353:    lda f10ee,x
@@ -872,7 +871,7 @@ i178e:    lda f10b5,x
          lda f10af,x
          sta f106c,x
          ldy f107e,x
-         lda f1ac6,y
+         lda wav,y
 i17a2:    sta f10d2,x
 i17a5:    lda a1087
          and #$08
@@ -1158,7 +1157,7 @@ q21:
 //              SOUNDS
 //---------------------------------------
 f1ac5:          // pulse
-.label f1ac6    = *+1 // waveform
+.label wav    = *+1 // waveform
 .label f1ac7    = *+2 // attack/decay
 .label f1ac8    = *+3 // sustain/release
 .label f1ac9    = *+4 // len/fil+drum
