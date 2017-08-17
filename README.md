@@ -1,23 +1,14 @@
 # Tunes made in Turbo Assembler on a Commodore 64
 
-This is a digital archeology project to save old tunes made by me and friends in assembler code on Commodore 64.
-The source is a big box containing all my Commodore 64 floppy disks. This box was kindly converted digital image file (.d64) by the X team.
+This is a digital archeology project to save old tunes made by me and my friends in assembler code on the Commodore 64.
+The source is a big box containing all my Commodore 64 floppy disks. These floppy disks were kindly converted by the dedicated conversion team at the [X2008](https://en.wikipedia.org/wiki/X_(demoparty)) demoparty, to disk images (.d64 files). 
+
+The Turbo Assembler source files were then converted to [KickAssembler](http://www.theweb.dk/KickAssembler) format.
 
 Music: Michel de Bree &amp; Marvin Severijns
-Player code: Thomas E. Petersen &amp; Charles Deenen
 
-## From ```.d64``` to Kick Assembler ```.asm```
+Player code: Thomas E. Petersen, Charles Deenen, Falco Paul
 
-Prerequisites:
+# Build
 
-- [VICE emulator](http://vice-emu.sourceforge.net)
-- [TMPView](http://style64.org/release/tmpview-v1.3.1-style)
-- [Tasm to Kick Assembler Converter (online)](http://tasmtokickass.insoft.se)
-
-Extract the ```.d64``` file:
-
-    c1541 -attach "$1" 8 -extract
-
-Convert the assembler source file to Tasm code:
-
-    tmpview in > out.asm
+A ```makefile``` is included. It works on my MacBook with Java 8 installed. It builds c64 executables (```.prg```) and mp3 previews for all source files.
